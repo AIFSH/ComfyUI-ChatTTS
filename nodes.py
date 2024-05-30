@@ -50,7 +50,7 @@ class ChatTTS:
                         "default":1.05,
                     }),
                     "use_decoder":("BOOLEAN",{
-                        "default": False
+                        "default": True
                     }),
                     }
                 }
@@ -93,16 +93,14 @@ class ChatTTS:
             'top_K': top_K, # top K decode
             'repetition_penalty': repetition_penalty
         } 
-        text = text.replace('\n', '')
-        wav = chat.infer(text, 
+        text = [text.replace('\n', '')]
+        wavs = chat.infer(text, 
                          params_refine_text=params_refine_text, 
                          params_infer_code=params_infer_code,
                          use_decoder=use_decoder)
         wav_path = os.path.join(out_path,f"chattts_{time.time()}.wav")
-        wavwrite(wav_path,24000,
-        (np.array(wav) * 32768).astype(
-            np.int16
-        )) 
+        
+        wavwrite(wav_path,24000,wavs[0].T) 
         return (wav_path,)
 
 class PreViewAudio:
