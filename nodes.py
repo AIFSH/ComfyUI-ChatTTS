@@ -13,6 +13,9 @@ out_path = folder_paths.get_output_directory()
 now_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(now_dir,"pretrained_models")
 class ChatTTS:
+    def __init__(self):
+        self.chat = None
+
     @classmethod
     def INPUT_TYPES(s):
         return {"required":
@@ -74,12 +77,13 @@ class ChatTTS:
             repetition_penalty,use_decoder):
         
         # torch.set_float32_matmul_precision('high')
-        chat = Chat()
-        # device = 'cuda' if cuda_malloc_supported() else "cpu"
-        chat.load_models(source="local",local_path=model_path,compile=False)
+        if not self.chat:
+            self.chat = Chat()
+            # device = 'cuda' if cuda_malloc_supported() else "cpu"
+            self.chat.load_models(source="local",local_path=model_path,compile=False)
 
         torch.manual_seed(seed)
-        rand_spk = chat.sample_random_speaker()
+        rand_spk = self.chat.sample_random_speaker()
         
         params_infer_code = {
             'spk_emb': rand_spk, # add sampled speaker 
@@ -103,7 +107,7 @@ class ChatTTS:
         } 
         text = [text.replace('\n', '')]
         torch.manual_seed(seed)
-        wavs = chat.infer(text, 
+        wavs = self.chat.infer(text, 
                          params_refine_text=params_refine_text, 
                          params_infer_code=params_infer_code,
                          use_decoder=use_decoder,
