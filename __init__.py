@@ -42,11 +42,11 @@ from .nodes import PreViewAudio,ChatTTS
 # NOTE: names should be globally unique
 NODE_CLASS_MAPPINGS = {
     "ChatTTS":ChatTTS,
-    "PreViewAudio": PreViewAudio,
+    "PreViewAudio": PreViewAudio
 }
 
 # A dictionary that contains the friendly/humanly readable titles for the nodes
 NODE_DISPLAY_NAME_MAPPINGS = {
     "ChatTTS":"ChatTTS Node",
-    "PreViewAudio": "PreView Audio",
+    "PreViewAudio": "PreView Audio"
 }
