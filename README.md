@@ -22,7 +22,7 @@ pip install -r requirements.txt
 or if you still struggle with huggingface, you may try follow [hf-mirror](https://hf-mirror.com/) to config your env.
 
 ## Tutorial
-- [Demo]()
+- [Demo](https://www.bilibili.com/video/BV1Wt421K7VV)
 
 ## WeChat Group && Donate
 <div>
