@@ -15,6 +15,9 @@ model_path = os.path.join(now_dir,"pretrained_models")
 class ChatTTS:
     def __init__(self):
         self.chat = None
+        self.rand_spk = None
+        self.seed = 2222
+        torch.manual_seed(self.seed)
 
     @classmethod
     def INPUT_TYPES(s):
@@ -81,12 +84,15 @@ class ChatTTS:
             self.chat = Chat()
             # device = 'cuda' if cuda_malloc_supported() else "cpu"
             self.chat.load_models(source="local",local_path=model_path,compile=False)
-
-        torch.manual_seed(seed)
-        rand_spk = self.chat.sample_random_speaker()
+            self.rand_spk = self.chat.sample_random_speaker()
         
+        if self.seed != seed:
+            torch.manual_seed(self.seed)
+            self.rand_spk = self.chat.sample_random_speaker()
+            self.seed = seed
+
         params_infer_code = {
-            'spk_emb': rand_spk, # add sampled speaker 
+            'spk_emb': self.rand_spk, # add sampled speaker 
             'temperature': temperature, # using custom temperature
             'top_P': top_P, # top P decode
             'top_K': top_K, # top K decode
@@ -106,7 +112,7 @@ class ChatTTS:
             'repetition_penalty': repetition_penalty
         } 
         text = [text.replace('\n', '')]
-        torch.manual_seed(seed)
+        # torch.manual_seed(seed)
         wavs = self.chat.infer(text, 
                          params_refine_text=params_refine_text, 
                          params_infer_code=params_infer_code,
