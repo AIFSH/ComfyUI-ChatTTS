@@ -21,6 +21,8 @@ pip install -r requirements.txt
 `weights` will be downloaded from huggingface automatically! if you in china,make sure your internet attach the huggingface
 or if you still struggle with huggingface, you may try follow [hf-mirror](https://hf-mirror.com/) to config your env.
 
+or download the `asset` and `config` from [2Noise/ChatTTS](https://hf-mirror.com/2Noise/ChatTTS/tree/main), put them in `ComfyUI-ChatTTS/pretrained_models`
+
 ## Tutorial
 - [Demo](https://www.bilibili.com/video/BV1Wt421K7VV)
 
