@@ -4,8 +4,5 @@ einops
 vector_quantize_pytorch
 transformers~=4.41.1
 vocos
-pynini==2.1.5 
-Cython   
-WeTextProcessing
 scipy
 audiotsm
