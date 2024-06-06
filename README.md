@@ -17,6 +17,11 @@ This repo is for academic purposes only. It is intended for educational and rese
 git clone https://github.com/AIFSH/ComfyUI-ChatTTS.git
 cd ComfyUI-ChatTTS
 pip install -r requirements.txt
+
+# if Linux, you need install follow module to enable text normalize
+pip install pynini==2.1.5 
+pip install Cython   
+pip install WeTextProcessing
 ```
 `weights` will be downloaded from huggingface automatically! if you in china,make sure your internet attach the huggingface
 or if you still struggle with huggingface, you may try follow [hf-mirror](https://hf-mirror.com/) to config your env.
