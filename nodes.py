@@ -57,7 +57,9 @@ class ChatTTS:
                     "temperature":("FLOAT",{
                         "default":0.3,
                         "min": 0.,
-                        "max":1
+                        "max":1,
+                        "step":0.001,
+                        "display":"slider"
                     }),
                     "refine_temperature":("FLOAT",{
                         "default":0.7,
