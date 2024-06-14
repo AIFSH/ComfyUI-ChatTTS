@@ -13,7 +13,7 @@ from audiotsm.io.wav import WavReader, WavWriter
 
 LangSegment.setfilters(["zh", "ja", "en"])
 
-out_path = folder_paths.get_output_directory()
+# out_path = folder_paths.get_output_directory()
 now_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(now_dir,"pretrained_models")
 splits = {"，", "。", "？", "！", ",", ".", "?", "!", "~", ":", "：", "—", "…", }
@@ -131,7 +131,7 @@ class ChatTTS:
                          params_infer_code=params_infer_code,
                          use_decoder=use_decoder,
                          do_text_normalization= False)[0]
-            tmp_wav_path = os.path.join(out_path,"chattts_tmp.wav")
+            tmp_wav_path = os.path.join(folder_paths.get_output_directory(),"chattts_tmp.wav")
             wavwrite(tmp_wav_path,24000,
             (np.concatenate(tmp_wav,0) * 32768).astype(
                 np.int16
@@ -139,12 +139,12 @@ class ChatTTS:
             wav_seg += AudioSegment.from_file(tmp_wav_path,format="wav")
             os.remove(tmp_wav_path)
 
-        wav_path = os.path.join(out_path,f"chattts_{time.time()}.wav")
+        wav_path = os.path.join(folder_paths.get_output_directory(),f"chattts_{time.time()}.wav")
         wav_seg.export(wav_path, format="wav")
         #torchaudio.save(wav_path, torch.from_numpy(wavs[0]), 24000,format="wav")
         # wavwrite(wav_path,24000,wavs[0].T)
         
-        res_path = os.path.join(out_path,f"{speed}_{os.path.basename(wav_path)}")
+        res_path = os.path.join(folder_paths.get_output_directory(),f"{speed}_{os.path.basename(wav_path)}")
         
         if speed < 1.0 or speed > 1.0:
             with WavReader(wav_path) as reader:
