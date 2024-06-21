@@ -78,7 +78,7 @@ class ChatTTS:
     CATEGORY = "AIFSH_ChatTTS"
     DESCRIPTION = "hello world!"
 
-    RETURN_TYPES = ("AUDIO",)
+    RETURN_TYPES = ("AUDIOPATH",)
 
     OUTPUT_NODE = False
 
@@ -212,7 +212,7 @@ class PreViewAudio:
     @classmethod
     def INPUT_TYPES(s):
         return {"required":
-                    {"audio": ("AUDIO",),}
+                    {"audio": ("AUDIOPATH",),}
                 }
 
     CATEGORY = "AIFSH_ChatTTS"
