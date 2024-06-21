@@ -2,7 +2,7 @@ import { app } from "../../../scripts/app.js";
 import { api } from '../../../scripts/api.js'
 
 function fitHeight(node) {
-    node.setSize([node.size[0], node.computeSize([node.size[0], node.size[1]])[1]])
+    node?.setSize([node.size[0], node.computeSize([node.size[0], node.size[1]])[1]])
     node?.graph?.setDirtyCanvas(true);
 }
 function chainCallback(object, property, callback) {
